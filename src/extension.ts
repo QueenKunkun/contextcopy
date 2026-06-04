@@ -15,6 +15,11 @@ function getContext(editor: vscode.TextEditor) {
 	return { relativePath, lineInfo, code, language: document.languageId };
 }
 
+function getFence(code: string): string {
+	const longest = Math.max(0, ...([...code.matchAll(/`+/g)].map(m => m[0].length)));
+	return '`'.repeat(Math.max(3, longest + 1));
+}
+
 export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		vscode.commands.registerCommand('contextcopy.copy', async () => {
@@ -31,8 +36,9 @@ export function activate(context: vscode.ExtensionContext) {
 			if (!editor) { return; }
 
 			const { relativePath, lineInfo, code, language } = getContext(editor);
+			const fence = getFence(code);
 			await vscode.env.clipboard.writeText(
-				`File: ${relativePath}\nLines: ${lineInfo}\n\n\`\`\`${language}\n${code}\n\`\`\``
+				`File: ${relativePath}\nLines: ${lineInfo}\n\n${fence}${language}\n${code}\n${fence}`
 			);
 			vscode.window.showInformationMessage(`Copied ${relativePath}:${lineInfo}`);
 		})
