@@ -18,3 +18,5 @@ TODO.md
 .env
 tmp/**
 images/*.html
+scripts/
+*.toml
