@@ -27,6 +27,20 @@ const result = parse(input);
 
 Both commands work with or without a selection — if nothing is selected, the current line is copied.
 
+## Install (from market)
+
+1. Download from [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=KristinZhang.contextcopy ) or
+2. Download from [openvsx](https://open-vsx.org/extension/KristinZhang/contextcopy )
+
+## Install (from source)
+
+```bash
+pnpm install
+pnpm run compile
+```
+
+Then press `F5` in VS Code to launch the Extension Development Host, or package with `vsce package`.
+
 ## Usage
 
 1. Open a file in the editor
