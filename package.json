@@ -1,0 +1,70 @@
+{
+  "name": "contextcopy",
+  "displayName": "ContextCopy",
+  "license": "MIT",
+  "publisher": "KristinZhang",
+  "description": "Copy selected code with file path and line numbers.",
+  "repository": {
+    "url": "https://github.com/QueenKunkun/contextcopy"
+  },
+  "bugs": {
+    "url": "https://github.com/QueenKunkun/contextcopy/issues",
+    "email": "742711819@qq.com"
+  },
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "icon": "images/icon.png",
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "contextcopy.copy",
+        "title": "ContextCopy: Copy Code Context"
+      },
+      {
+        "command": "contextcopy.copyMarkdown",
+        "title": "ContextCopy: Copy Markdown Context"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "pnpm run compile-tests && pnpm run compile && pnpm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test",
+    "publish": "pnpm publish-vsce && pnpm publish-ovsx",
+    "publish-vsce": "vsce package && vsce publish",
+    "publish-ovsx": "bash -c 'source .env && npx ovsx publish -p $vsx_token'"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@typescript-eslint/eslint-plugin": "^8.42.0",
+    "@typescript-eslint/parser": "^8.42.0",
+    "eslint": "^9.34.0",
+    "typescript": "^5.9.2",
+    "ts-loader": "^9.5.4",
+    "webpack": "^5.101.3",
+    "webpack-cli": "^6.0.1",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2"
+  },
+  "keywords": [
+    "copy context",
+    "code context",
+    "copy file path",
+    "copy line number"
+  ]
+}
