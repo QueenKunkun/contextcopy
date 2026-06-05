@@ -80,7 +80,7 @@
     "pretest": "pnpm run compile-tests && pnpm run compile && pnpm run lint",
     "lint": "eslint src",
     "test": "vscode-test",
-    "publish": "pnpm publish-vsce && pnpm publish-ovsx",
+    "publish-all": "pnpm publish-vsce && pnpm publish-ovsx",
     "publish-vsce": "vsce package && vsce publish",
     "publish-ovsx": "bash -c 'source .env && npx ovsx publish -p $vsx_token'"
   },
