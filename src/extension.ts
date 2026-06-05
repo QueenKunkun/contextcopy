@@ -83,7 +83,7 @@ export function activate(context: vscode.ExtensionContext) {
 			const { relativePath, lineInfo, code, language } = getContext(editor);
 			const fence = getFence(code);
 			await vscode.env.clipboard.writeText(
-				`File: ${relativePath}\nLines: ${lineInfo}\n\n${fence}${language}\n${code}\n${fence}`
+				`File: ${relativePath}\nLines: ${lineInfo}\n\n${fence}${language}\n${code}\n${fence}\n`
 			);
 			vscode.window.showInformationMessage(`Copied ${relativePath}:${lineInfo}`);
 		}),
