@@ -11,7 +11,7 @@
     "url": "https://github.com/QueenKunkun/contextcopy/issues",
     "email": "742711819@qq.com"
   },
-  "version": "0.0.3",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -36,19 +36,19 @@
     "commands": [
       {
         "command": "contextcopy.copy",
-        "title": "Copy Code Context"
+        "title": "ContextCopy: Copy Code Context"
       },
       {
         "command": "contextcopy.copyMarkdown",
-        "title": "Copy Markdown Context"
+        "title": "ContextCopy: Copy Markdown Context"
       },
       {
         "command": "contextcopy.copyFiles",
-        "title": "Copy File(s)"
+        "title": "ContextCopy: Copy File(s)"
       },
       {
         "command": "contextcopy.copyFilesMarkdown",
-        "title": "Copy File(s) as Markdown"
+        "title": "ContextCopy: Copy File(s) as Markdown"
       }
     ],
     "menus": {
