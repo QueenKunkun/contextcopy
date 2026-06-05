@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.0.3] - 2026-06-05
+
+- New: Copy File(s) — copy full contents of multiple Explorer files in plain format
+- New: Copy File(s) as Markdown — copy multiple files as fenced Markdown blocks with language
+- Both commands available in Explorer right-click → ContextCopy submenu (supports multi-select)
+
 ## [0.0.2] - 2026-06-04
 
 - Fix: use dynamic fence length to handle backticks in copied code

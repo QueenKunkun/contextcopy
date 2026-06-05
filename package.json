@@ -11,27 +11,64 @@
     "url": "https://github.com/QueenKunkun/contextcopy/issues",
     "email": "742711819@qq.com"
   },
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.85.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onCommand:contextcopy.copy",
+    "onCommand:contextcopy.copyMarkdown",
+    "onCommand:contextcopy.copyFiles",
+    "onCommand:contextcopy.copyFilesMarkdown"
+  ],
   "icon": "images/icon.png",
   "main": "./dist/extension.js",
   "contributes": {
+    "submenus": [
+      {
+        "id": "contextcopy.submenu",
+        "label": "ContextCopy"
+      }
+    ],
     "commands": [
       {
         "command": "contextcopy.copy",
-        "title": "ContextCopy: Copy Code Context"
+        "title": "Copy Code Context"
       },
       {
         "command": "contextcopy.copyMarkdown",
-        "title": "ContextCopy: Copy Markdown Context"
+        "title": "Copy Markdown Context"
+      },
+      {
+        "command": "contextcopy.copyFiles",
+        "title": "Copy File(s)"
+      },
+      {
+        "command": "contextcopy.copyFilesMarkdown",
+        "title": "Copy File(s) as Markdown"
       }
-    ]
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "submenu": "contextcopy.submenu",
+          "group": "5_cutcopypaste@90"
+        }
+      ],
+      "contextcopy.submenu": [
+        {
+          "command": "contextcopy.copyFiles",
+          "group": "1@1"
+        },
+        {
+          "command": "contextcopy.copyFilesMarkdown",
+          "group": "1@2"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "pnpm run package",
