@@ -106,6 +106,24 @@ export function activate(context: vscode.ExtensionContext) {
 			if (!count) { vscode.window.showWarningMessage('No readable files selected.'); return; }
 			await vscode.env.clipboard.writeText(text);
 			vscode.window.showInformationMessage(`Copied ${count} file${count > 1 ? 's' : ''} as Markdown`);
+		}),
+
+		vscode.commands.registerCommand('contextcopy.copyFilePaths', async (_uri: vscode.Uri, uris: vscode.Uri[]) => {
+			const targets = uris?.length ? uris : (_uri ? [_uri] : []);
+			if (!targets.length) { return; }
+
+			const paths = targets.map(uri => uri.fsPath);
+			await vscode.env.clipboard.writeText(paths.join('\n'));
+			vscode.window.showInformationMessage(`Copied ${paths.length} absolute path${paths.length > 1 ? 's' : ''}`);
+		}),
+
+		vscode.commands.registerCommand('contextcopy.copyFileRelativePaths', async (_uri: vscode.Uri, uris: vscode.Uri[]) => {
+			const targets = uris?.length ? uris : (_uri ? [_uri] : []);
+			if (!targets.length) { return; }
+
+			const paths = targets.map(uri => vscode.workspace.asRelativePath(uri, false));
+			await vscode.env.clipboard.writeText(paths.join('\n'));
+			vscode.window.showInformationMessage(`Copied ${paths.length} relative path${paths.length > 1 ? 's' : ''}`);
 		})
 	);
 }

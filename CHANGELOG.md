@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.6] - 2026-06-09
+
+- New: Copy Path(s) of selected File(s)
+
 ## [0.0.3] - 2026-06-05
 
 - New: Copy File(s) — copy full contents of multiple Explorer files in plain format
