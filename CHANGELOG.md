@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.7] - 2026-07-04
+
+- Refactor: Use full path of file in the copied text
+
 ## [0.0.6] - 2026-06-09
 
 - New: Copy Path(s) of selected File(s)

@@ -11,7 +11,7 @@ Two commands available via the Command Palette (`Cmd+Shift+P`):
 **Copy Code Context** — plain format, great for inline references:
 
 ```
-// src/utils/parser.ts:42-48
+// /Users/apple/project/src/utils/parser.ts:42-48
 
 const result = parse(input);
 ```
@@ -19,7 +19,7 @@ const result = parse(input);
 **Copy Markdown Context** — fenced code block with language, great for AI chats and GitHub:
 
 ````
-File: src/utils/parser.ts
+File: /Users/apple/project/src/utils/parser.ts
 Lines: 42-48
 
 ```typescript
@@ -36,7 +36,7 @@ Right-click any file (or multi-select with `Cmd+Click`) in the Explorer panel �
 **Copy File(s)** — plain format, one file per section:
 
 ```
-// src/utils/parser.ts
+// /Users/apple/project/src/utils/parser.ts
 
 <full file contents>
 
@@ -50,7 +50,7 @@ Right-click any file (or multi-select with `Cmd+Click`) in the Explorer panel �
 **Copy File(s) as Markdown** — fenced blocks with language tags, ideal for AI context:
 
 ````
-File: src/utils/parser.ts
+File: /Users/apple/project/src/utils/parser.ts
 
 ```typescript
 <full file contents>

@@ -12,7 +12,7 @@ function getContext(editor: vscode.TextEditor) {
 		? document.lineAt(selection.active.line).text
 		: document.getText(selection);
 
-	return { relativePath, lineInfo, code, language: document.languageId };
+	return { relativePath, fullPath: document.uri.fsPath, lineInfo, code, language: document.languageId };
 }
 
 function getFence(code: string): string {
@@ -39,10 +39,10 @@ async function readFilesAsMarkdown(uris: vscode.Uri[]): Promise<{ text: string; 
 		try {
 			const bytes = await vscode.workspace.fs.readFile(uri);
 			const content = Buffer.from(bytes).toString('utf8');
-			const relativePath = vscode.workspace.asRelativePath(uri, false);
+			// const relativePath = vscode.workspace.asRelativePath(uri, false);
 			const language = getLanguageFromUri(uri);
 			const fence = getFence(content);
-			parts.push(`File: ${relativePath}\n\n${fence}${language}\n${content}\n${fence}`);
+			parts.push(`File: ${uri.fsPath}\n\n${fence}${language}\n${content}\n${fence}`);
 		} catch {
 			// skip unreadable files (e.g. binaries)
 		}
@@ -56,8 +56,8 @@ async function readFilesAsPlain(uris: vscode.Uri[]): Promise<{ text: string; cou
 		try {
 			const bytes = await vscode.workspace.fs.readFile(uri);
 			const content = Buffer.from(bytes).toString('utf8');
-			const relativePath = vscode.workspace.asRelativePath(uri, false);
-			parts.push(`// ${relativePath}\n\n${content}`);
+			// const relativePath = vscode.workspace.asRelativePath(uri, false);
+			parts.push(`// ${uri.fsPath}\n\n${content}`);
 		} catch {
 			// skip unreadable files
 		}
@@ -71,21 +71,21 @@ export function activate(context: vscode.ExtensionContext) {
 			const editor = vscode.window.activeTextEditor;
 			if (!editor) { return; }
 
-			const { relativePath, lineInfo, code } = getContext(editor);
-			await vscode.env.clipboard.writeText(`// ${relativePath}:${lineInfo}\n\n${code}`);
-			vscode.window.showInformationMessage(`Copied ${relativePath}:${lineInfo}`);
+			const { relativePath, fullPath, lineInfo, code } = getContext(editor);
+			await vscode.env.clipboard.writeText(`// ${fullPath}:${lineInfo}\n\n${code}`);
+			vscode.window.showInformationMessage(`Copied ${fullPath}:${lineInfo}`);
 		}),
 
 		vscode.commands.registerCommand('contextcopy.copyMarkdown', async () => {
 			const editor = vscode.window.activeTextEditor;
 			if (!editor) { return; }
 
-			const { relativePath, lineInfo, code, language } = getContext(editor);
+			const { relativePath, fullPath, lineInfo, code, language } = getContext(editor);
 			const fence = getFence(code);
 			await vscode.env.clipboard.writeText(
-				`File: ${relativePath}\nLines: ${lineInfo}\n\n${fence}${language}\n${code}\n${fence}\n`
+				`File: ${fullPath}\nLines: ${lineInfo}\n\n${fence}${language}\n${code}\n${fence}\n`
 			);
-			vscode.window.showInformationMessage(`Copied ${relativePath}:${lineInfo}`);
+			vscode.window.showInformationMessage(`Copied ${fullPath}:${lineInfo}`);
 		}),
 
 		vscode.commands.registerCommand('contextcopy.copyFiles', async (_uri: vscode.Uri, uris: vscode.Uri[]) => {
@@ -128,4 +128,4 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 }
 
-export function deactivate() {}
+export function deactivate() { }
